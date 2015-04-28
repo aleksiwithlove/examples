@@ -70,10 +70,10 @@ void my_callback(Fl_Widget* winp, void*p)
 	M_Win * win=(M_Win *)p;
 	int x  = ToInt(win->inp1->value());
 	int y = ToInt(win->inp2->value());
-	int z = x+y;
+	//int z = x+y;
 	
 	
-   	win->inp3->value(ToString(z));
+   	win->inp3->value(ToString(x+y));
 	
 }
 
