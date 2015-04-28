@@ -9,6 +9,7 @@
 #include <FL/Fl_Button.H>
 #include "string.h"
 #include "stdlib.h"
+#include <cstring>
 #include <sstream>
 #include <string>
 using namespace std;
@@ -33,7 +34,7 @@ class M_Win:public Fl_Window{
 		inp2 = new Fl_Input(140,40,60,60);
 		inp3 = new Fl_Input(240,40,60,60);
 
-		bt = new Fl_Button(40, 100, 30, 30, "Calc");
+		bt = new Fl_Button(40, 100, 30, 30, "+");
 		show();
     } 
 
@@ -45,21 +46,35 @@ class M_Win:public Fl_Window{
 		
 	}
 };
-std::string ToString(int val)
+const char* ToString(int val)
 {
-    std::ostringstream oss;
-    oss << val;
-    return oss.str();
+	stringstream stream;
+	stream << val;
+	
+	return stream.str().c_str();
+	
 }
+
+int ToInt(const char* val)
+{
+	string str(val);
+	stringstream stream(str);
+	int z;
+	stream >> z;
+	return z;
+
+}
+
 void my_callback(Fl_Widget* winp, void*p)
 {
 	M_Win * win=(M_Win *)p;
-	int x  = atoi(win->inp1->value());
-	int y = atoi(win->inp2->value());
+	int x  = ToInt(win->inp1->value());
+	int y = ToInt(win->inp2->value());
 	int z = x+y;
 	
-   	win->inp3->value(s1);
-	//show();
+	
+   	win->inp3->value(ToString(z));
+	
 }
 
 int main(){
